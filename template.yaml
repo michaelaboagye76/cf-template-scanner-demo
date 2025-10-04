@@ -1,0 +1,8 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Simple demo CloudFormation template"
+
+Resources:
+  DemoBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "demo-bucket-${AWS::AccountId}-${AWS::Region}"
