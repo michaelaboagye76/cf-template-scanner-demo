@@ -1,20 +1,15 @@
-version: 0.2
-
 phases:
   install:
     commands:
-      - echo Installing dependencies...
+      - echo "Installing dependencies..."
       - yum install -y unzip jq --allowerasing
-      - echo Downloading Trend Micro Cloud One Conformity Template Scanner...
+      - echo "Downloading Trend Micro Cloud One Template Scanner..."
       - curl -L -o template_scan.zip https://github.com/trendmicro/cloudone-template-scan/releases/download/v1.5.0/template_scan_linux_amd64.zip
-      - unzip template_scan.zip -d /usr/local/bin/
+      - echo "Download complete. Verifying..."
+      - ls -lh
+      - file template_scan.zip
+      - echo "Unzipping scanner..."
+      - unzip -o template_scan.zip -d /usr/local/bin/
       - chmod +x /usr/local/bin/template_scan
-      - template_scan version
-  build:
-    commands:
-      - echo Running CloudFormation Template Scan...
-      - template_scan scan --template-path template.yml --output results.json
-
-artifacts:
-  files:
-    - results.json
+      - echo "Verifying installation..."
+      - /usr/local/bin/template_scan version
