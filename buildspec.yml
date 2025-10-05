@@ -4,12 +4,17 @@ phases:
   install:
     commands:
       - echo Installing dependencies...
-      - pip install --upgrade pip
-      - pip install trendcloudone-conformity-template-scanner
+      - yum install -y unzip jq curl
+      - echo Downloading Trend Micro Cloud One Conformity Template Scanner...
+      - curl -LO https://github.com/trendmicro/cloudone-template-scan/releases/latest/download/template_scan.zip
+      - unzip template_scan.zip -d /usr/local/bin/
+      - chmod +x /usr/local/bin/template_scan
+      - template_scan version
   build:
     commands:
-      - echo Running Cloud One - Conformity Template Scanner...
-      - conformity-template-scanner scan template.yaml --output results.json
+      - echo Running CloudFormation Template Scan...
+      # Replace path/to/template.yml with your CloudFormation file
+      - template_scan scan --template-path template.yml --output results.json
 artifacts:
   files:
     - results.json
