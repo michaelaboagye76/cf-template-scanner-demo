@@ -10,7 +10,11 @@ phases:
       - echo "Listing files after download..."
       - ls -lh
       - echo "Checking if file exists..."
-      - if [ ! -f template_scan.zip ]; then echo "❌ Download failed: template_scan.zip not found"; exit 1; fi
+      - |
+        if [ ! -f template_scan.zip ]; then
+          echo "❌ Download failed: template_scan.zip not found"
+          exit 1
+        fi
       - echo "Unzipping scanner..."
       - unzip -o template_scan.zip -d /usr/local/bin/
       - chmod +x /usr/local/bin/template_scan
