@@ -6,10 +6,11 @@ phases:
       - echo "Installing dependencies..."
       - yum install -y unzip jq --allowerasing
       - echo "Downloading Trend Micro Cloud One Template Scanner..."
-      - curl -L -o template_scan.zip https://github.com/trendmicro/cloudone-template-scan/releases/download/v1.5.0/template_scan_linux_amd64.zip
-      - echo "Download complete. Verifying..."
+      - curl -L -o template_scan.zip -w "%{http_code}" https://github.com/trendmicro/cloudone-template-scan/releases/latest/download/template_scan_linux_amd64.zip
+      - echo "Listing files after download..."
       - ls -lh
-      - file template_scan.zip
+      - echo "Checking if file exists..."
+      - if [ ! -f template_scan.zip ]; then echo "❌ Download failed: template_scan.zip not found"; exit 1; fi
       - echo "Unzipping scanner..."
       - unzip -o template_scan.zip -d /usr/local/bin/
       - chmod +x /usr/local/bin/template_scan
