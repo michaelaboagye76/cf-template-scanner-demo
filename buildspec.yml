@@ -6,7 +6,7 @@ phases:
       - echo Installing dependencies...
       - yum install -y unzip jq --allowerasing
       - echo Downloading Trend Micro Cloud One Conformity Template Scanner...
-      - curl -LO https://github.com/trendmicro/cloudone-template-scan/releases/latest/download/template_scan.zip
+      - curl -L -o template_scan.zip https://github.com/trendmicro/cloudone-template-scan/releases/download/v1.5.0/template_scan_linux_amd64.zip
       - unzip template_scan.zip -d /usr/local/bin/
       - chmod +x /usr/local/bin/template_scan
       - template_scan version
