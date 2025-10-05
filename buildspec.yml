@@ -1,3 +1,5 @@
+version: 0.2
+
 phases:
   install:
     commands:
@@ -13,3 +15,12 @@ phases:
       - chmod +x /usr/local/bin/template_scan
       - echo "Verifying installation..."
       - /usr/local/bin/template_scan version
+
+  build:
+    commands:
+      - echo "Running CloudFormation Template Scan..."
+      - /usr/local/bin/template_scan scan --template-path template.yaml --output results.json
+
+artifacts:
+  files:
+    - results.json
