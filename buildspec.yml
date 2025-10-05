@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - echo Installing dependencies...
-      - yum install -y unzip jq curl
+      - yum install -y unzip jq --allowerasing
       - echo Downloading Trend Micro Cloud One Conformity Template Scanner...
       - curl -LO https://github.com/trendmicro/cloudone-template-scan/releases/latest/download/template_scan.zip
       - unzip template_scan.zip -d /usr/local/bin/
@@ -13,8 +13,8 @@ phases:
   build:
     commands:
       - echo Running CloudFormation Template Scan...
-      # Replace path/to/template.yml with your CloudFormation file
       - template_scan scan --template-path template.yml --output results.json
+
 artifacts:
   files:
     - results.json
