@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - pip install --upgrade pip
+      - pip install trendcloudone-conformity-template-scanner
+  build:
+    commands:
+      - echo Running Cloud One - Conformity Template Scanner...
+      - conformity-template-scanner scan template.yaml --output results.json
+artifacts:
+  files:
+    - results.json
